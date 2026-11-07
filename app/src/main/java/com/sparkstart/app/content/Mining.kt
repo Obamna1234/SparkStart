@@ -39,7 +39,7 @@ internal val miningModule = Module(
                     "AS/NZS 2081: electrical protection devices for mines",
                     "Electrical log book: inspections, tests and work are recorded"
                 ),
-                Tip("WA currently has no underground COAL mines. WA underground mines are mostly hard rock (gold, nickel, etc.), so the coal-specific explosion-protection rules you might read about from NSW/QLD often don't apply, but hazardous areas can still exist."),
+                Tip("WA's underground mines are mostly metalliferous (hard rock: gold, nickel and more). Many rules you'll read about from NSW/QLD are written for underground COAL mines and use different standards (e.g. AS/NZS 1802 cables instead of AS/NZS 2802). Check which ones apply to your mine. Hazardous areas can still exist on any site."),
                 quiz("Which regulations replaced the WA Mines Safety and Inspection laws for safety in 2022?", 1, "The WHS (Mines) Regulations 2022 took effect on 31 March 2022.", "AS/NZS 3000", "WHS (Mines) Regulations 2022", "AS/NZS 3760", "The WAER")
             )
         ),
@@ -76,7 +76,7 @@ internal val miningModule = Module(
                     "A PILOT core for earth-continuity monitoring",
                     "Screens and tough outer sheath (depending on cable type)"
                 ),
-                Std("AS/NZS 2802 + WHS (Mines) Regs r.641E", "In WA, trailing and reeling cables must conform to AS/NZS 2802 and have a pilot core arranged to cut off supply if earth continuity is lost (per the WA regulator's guidance)."),
+                Std("AS/NZS 2802:2000 + WHS (Mines) Regs r.641E", "In WA, trailing and reeling cables must conform to AS/NZS 2802 and have a pilot core arranged to cut off supply if earth continuity is lost. An end-of-line resistor or diode at the machine end completes the pilot loop. The monitoring must trip on an open-circuit OR a short-circuit pilot. Relays are tested routinely and labelled with the test date (r.641C, r.641F). Source: WorkSafe WA guidance on trailing and reeling cables."),
                 Vis(Visual.PILOT_CORE, "Break the earth, cut the pilot, or unplug. Watch the relay trip.")
             ),
             page(
@@ -92,7 +92,7 @@ internal val miningModule = Module(
                     "Hang cables on proper hooks/supports, out of the way of plant",
                     "Never drive over a trailing cable unless it's protected for that",
                     "Check cables and plugs for cuts, crush damage and water",
-                    "Damaged cables are tagged out and repaired by approved methods (e.g. vulcanised repairs by a specialist workshop), then tested"
+                    "Damaged cables are tagged out and repaired by approved methods (e.g. vulcanised repairs by a specialist workshop, per AS/NZS 1747), then tested"
                 ),
                 WhyNot("Why can't you tape up a cut in a trailing cable? Tape can't restore insulation strength, the screen, the earth, or the toughness the cable needs. Water gets in. A taped cable can fail without warning while people are standing next to it."),
                 Hazard("A cable under tension or on a reel can whip or crush. Stay clear of the reel when the machine moves."),

@@ -36,7 +36,7 @@ internal val safetyModule = Module(
                 "Never work live",
                 P("The number one rule: work on circuits DEAD. Live work is banned except in very limited situations with strict controls, and never by an apprentice."),
                 P("Making something dead and keeping it dead is called ISOLATION. It has a set order."),
-                Std("AS/NZS 4836", "AS/NZS 4836 covers safe working on or near low-voltage electrical installations and equipment. Your training and your workplace procedures are based on it."),
+                Std("AS/NZS 4836:2023", "AS/NZS 4836 covers safe working on or near low-voltage electrical installations and equipment. Your training and your workplace procedures are based on it."),
                 order(
                     "Put the isolation steps in order",
                     "Identify the right circuit / equipment",

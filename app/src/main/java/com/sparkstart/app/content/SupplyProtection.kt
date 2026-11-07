@@ -72,7 +72,7 @@ internal val supplyModule = Module(
             page(
                 "The main earth",
                 P("The main earthing conductor runs from the main earth bar to the earth electrode (stake). Its resistance is tested as part of verification."),
-                Std("Section 8 (testing)", "Earth continuity testing includes the main earthing conductor and bonding conductors. A commonly taught maximum for the main earthing conductor is 0.5 Ω. Circuit protective earths are checked against a table in Section 8."),
+                Std("Clauses 8.3.5 and 5.5.1.4", "Earth continuity testing includes the main earthing conductor and bonding conductors. In an MEN installation, the resistance from the earth electrode to the main earthing terminal must not exceed 0.5 Ω."),
                 Hazard("Never disconnect a main earth or MEN link with the installation energised. Fault or neutral current could be flowing through it, and you could become the path."),
                 quiz("What is bonding mainly for?", 3, "Bonding keeps metal parts at the same voltage so a person can't get a shock between them.", "Making lights brighter", "Reducing your bill", "Carrying neutral current", "Keeping metal parts at the same voltage")
             )
@@ -133,7 +133,7 @@ internal val protectionModule = Module(
             page(
                 "RCD rules in homes",
                 Std("Clause 2.6.3.2.2 (domestic & residential, Australia)", "The 2018 Wiring Rules require 30 mA RCD protection on ALL final subcircuits in new domestic and residential installations, including things like cooktops, ovens, hot water and air-con. The well-known rules of no more than three final subcircuits per RCD and lighting circuits spread across RCDs still apply."),
-                Ask("In WA, homes being sold, rented or hired must meet RCD rules under the WA Electricity Regulations 1947 (at least two RCDs, no more than three final subcircuits per RCD). For existing homes, that can be different from what AS/NZS 3000:2018 requires for new work. Check the current Building and Energy guidance and the WAER."),
+                Std("WA Electricity Regulations 1947 (regs 12–16)", "In WA, homes being sold, rented or hired must have at least two RCDs protecting the socket-outlet and lighting final subcircuits, with no more than three final subcircuits per RCD and lighting circuits split between the RCDs. This is the minimum for existing homes. It's different from AS/NZS 3000:2018, which applies to new installations (WA: built after 1 January 2019). Source: WA Building and Energy."),
                 WhyNot("Why can't you put every circuit on one RCD? One fault or nuisance trip would kill power to the whole house, including all the lights, so you'd be in the dark next to the fault. Spreading circuits (and lights) across several RCDs, or using RCBOs, keeps some power on.")
             )
         )

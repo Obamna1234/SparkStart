@@ -211,7 +211,7 @@ internal val rulesModule = Module(
                     "Section 8: verification (inspection and testing)",
                     "Appendices: extra info and tables (e.g. Appendix C, maximum demand)"
                 ),
-                Std("Current edition", "AS/NZS 3000:2018, incorporating Amendments 1 (2020), 2 (2021) and 3 (May 2023). Check whether there's been a newer amendment or ruling since.")
+                Std("Current edition", "AS/NZS 3000:2018, incorporating Amendments 1 (2020), 2 (2021) and 3 (May 2023). A new edition is being prepared: a public-comment draft was targeted for late 2026 and the final edition for around mid-2027. Watch for it, because clause numbers may change.")
             ),
             page(
                 "How to find things fast",
@@ -241,20 +241,20 @@ internal val rulesModule = Module(
             page(
                 "Other standards you'll hear about",
                 bullets(
-                    "AS/NZS 3008.1.1: cable selection (current rating, voltage drop)",
+                    "AS/NZS 3008.1.1:2025: cable selection (current rating, voltage drop). Replaced the 2017 edition.",
                     "AS/NZS 3017: verification (testing) guidelines",
                     "AS/NZS 3019: periodic verification of existing installations",
-                    "AS/NZS 4836: safe working on low-voltage installations",
+                    "AS/NZS 4836:2023: safe working on or near low-voltage and extra-low-voltage installations",
                     "AS/NZS 3760: in-service safety inspection and testing (test & tag)",
                     "AS/NZS 3012: construction and demolition sites",
                     "AS/NZS 3010: generating sets",
                     "AS/NZS 3112: plugs and socket-outlets",
                     "AS/NZS 61439 series: switchgear assemblies (switchboards)",
-                    "AS 2293: emergency escape lighting and exit signs",
-                    "AS/NZS 4777: inverter connections (solar); AS/NZS 5033: PV arrays; AS/NZS 5139: battery systems",
+                    "AS/NZS 2293 series: emergency lighting and exit signs",
+                    "AS/NZS 4777.1:2024: inverter connections (solar); AS/NZS 5033: PV arrays; AS/NZS 5139:2019 Amd 1:2025: battery systems (mandatory in WA from 19 June 2026)",
                     "AS/NZS 3003: patient areas (hospitals, medical)",
                     "AS/NZS 1768: lightning protection",
-                    "Mining: AS/NZS 3007 (mines and quarries), AS/NZS 4871 (mining equipment), AS/NZS 2802 (reeling/trailing cables), AS/NZS 2081 (mining protection devices), AS/NZS 60079 series (explosive atmospheres), AS 2067 (HV substations)"
+                    "Mining: AS/NZS 3007 (mines and quarries), AS/NZS 4871 (mining equipment), AS/NZS 2802 (reeling/trailing cables), AS/NZS 1747 (trailing cable repair & testing), AS/NZS 2081 (mining protection devices), AS/NZS 60079 series (explosive atmospheres), AS 2067 (HV substations)"
                 ),
                 Tip("You don't need to memorise these. Just know they exist and roughly what each one covers.")
             )

@@ -15,12 +15,12 @@ internal val wiringModule = Module(
             page(
                 "Fixed wiring",
                 bullets(
-                    "ACTIVE: red is preferred for single phase (other colours are allowed, but never green/yellow, green or yellow)",
+                    "ACTIVE: red is preferred. Other colours are allowed, EXCEPT green/yellow, green, yellow, black or light blue (those are reserved for earth and neutral)",
                     "NEUTRAL: black or light blue",
                     "EARTH: green/yellow (older installs may have plain green)",
                     "Three-phase actives: red, white, blue"
                 ),
-                Std("Section 3 (identification of cores)", "Core colour rules are in Section 3 of the Wiring Rules. Check the exact list of allowed and banned colours in your copy."),
+                Std("Clause 3.8 (identification)", "Core colour rules are in Clause 3.8 and its colour table. Clause 3.8.1 was changed in Amendment 3 (2023), so check the exact wording in an up-to-date copy."),
                 Hazard("NEVER trust colours alone in an existing installation. Someone before you may have used the wrong colour. Test, don't guess.")
             ),
             page(
@@ -73,9 +73,9 @@ internal val wiringModule = Module(
                     "Fault current and earth fault-loop impedance",
                     "Temperature around it"
                 ),
-                Std("AS/NZS 3008.1.1", "Cable current ratings and voltage drop values come from AS/NZS 3008.1.1, used together with the Wiring Rules."),
+                Std("AS/NZS 3008.1.1:2025", "Cable current ratings and voltage drop values come from AS/NZS 3008.1.1, used together with the Wiring Rules. The 2025 edition replaced the 2017 edition, renumbered many tables and renamed 'derating factors' to 'correction factors'. In WA it must be used in full from 19 June 2026. Old textbooks and apps may still quote 2017 table numbers."),
                 Vis(Visual.VOLTAGE_DROP),
-                Std("Clause 3.6 (voltage drop)", "The commonly taught limit is 5% voltage drop from the point of supply to any point in the installation (11.5 V on 230 V). Check the clause and any special cases."),
+                Std("Clause 3.6.2 (voltage drop)", "The limit is 5% voltage drop from the point of supply to any point in the installation (11.5 V on 230 V, 20 V on 400 V). There's an exception allowing 7% where the supply comes from a dedicated low-voltage substation on the premises. Check the clause for the exact conditions."),
                 Hazard("Cable covered in ceiling insulation can't get rid of heat and its rating drops a lot. That's a common cause of overheating.")
             )
         ),
@@ -155,7 +155,7 @@ internal val testingModule = Module(
                 "What it does",
                 P("An insulation resistance (IR) tester, often called a 'megger', puts a high DC test voltage (usually 500 V for 230/400 V circuits) across the insulation and measures how much leaks through, in megohms (MΩ)."),
                 Vis(Visual.INSULATION),
-                Std("Clause 8.3.6 (insulation resistance)", "The commonly taught minimum is 1 MΩ between live conductors and earth when tested at 500 V DC for low-voltage circuits. There are special cases (e.g. some heating elements). Check the clause."),
+                Std("Clause 8.3.6 (insulation resistance)", "Minimum 1 MΩ between all live conductors and earth, tested at 500 V DC for 230/400 V installations (Clause 8.3.6.3). There are different values for things like sheathed heating elements. Check the clause."),
             ),
             page(
                 "Doing it safely",
@@ -177,7 +177,7 @@ internal val testingModule = Module(
             page(
                 "Earth continuity",
                 P("You prove every exposed metal part is solidly connected back to the main earth, using a low-resistance ohmmeter and usually a long trailing lead from the main earth bar."),
-                Std("Section 8 (earthing continuity)", "Main earthing and bonding conductors: commonly taught max 0.5 Ω. Circuit protective earth conductors are checked against values in a Section 8 table based on cable size and length."),
+                Std("Clauses 8.3.5 and 5.5.1.4 (earthing continuity)", "In an MEN installation, the resistance from the earth electrode to the main earthing terminal must not exceed 0.5 Ω. Circuit protective earth conductors are checked against values in a Section 8 table based on cable size and length."),
                 Tip("Zero (null) your leads first so their resistance isn't counted.")
             ),
             page(
@@ -216,7 +216,7 @@ internal val testingModule = Module(
             page(
                 "Dead tests first, then live",
                 order(
-                    "Put the commonly taught verification order in sequence",
+                    "Put the verification order (visual first, then the Clause 8.3.3 tests) in sequence",
                     "Visual inspection",
                     "Continuity of the earthing system",
                     "Insulation resistance",
@@ -225,7 +225,7 @@ internal val testingModule = Module(
                     "Earth fault-loop impedance",
                     "RCD operation"
                 ),
-                Std("Section 8 (verification)", "The mandatory tests and their requirements are in Section 8 of the Wiring Rules. AS/NZS 3017 gives guidance on how to do them."),
+                Std("Clause 8.3.3 (mandatory tests)", "Clause 8.3.3 lists the mandatory tests: earthing continuity, insulation resistance, polarity, correct circuit connections, verification of impedance (fault loop), and RCD operation. A visual inspection comes first. AS/NZS 3017 gives guidance on how to do them."),
                 WhyNot("Why can't you do the RCD test first to save time? Live tests on an installation you haven't proven safe can make metalwork live or hide faults. If the earth is missing, a live test could electrify the very thing you're touching. Dead tests prove it's safe to liven.")
             ),
             page(

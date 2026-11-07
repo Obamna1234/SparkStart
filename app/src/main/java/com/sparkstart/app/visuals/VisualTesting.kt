@@ -235,5 +235,5 @@ internal fun VoltageDropSim() {
     LabeledSlider("Cable length: ${length.roundToInt()} m", length, 5f..100f) { length = it }
     LabeledSlider("Current: ${amps.roundToInt()} A", amps, 1f..32f) { amps = it }
     Explain("Longer cable, more current, or thinner cable = more voltage lost along the way. Fix a big drop by using a bigger cable (or a shorter run).")
-    Explain("The mV/A·m numbers here are ROUGH classroom values just to show the idea. Real values come from AS/NZS 3008.1.1 tables and depend on cable type, temperature and installation method.")
+    Explain("The mV/A·m numbers here are ROUGH classroom values just to show the idea. Real values come from the AS/NZS 3008.1.1:2025 tables and depend on cable type, temperature and installation method.")
 }

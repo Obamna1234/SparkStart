@@ -70,7 +70,7 @@ internal val commercialModule = Module(
                 "Emergency and exit lighting",
                 P("Emergency lights and exit signs have batteries and come on when normal power fails, so people can get out."),
                 WhyNot("Why can't an emergency light run off the switched lighting circuit only? It needs an UNSWITCHED supply to keep its battery charged and to sense when power fails. If it's wired after the light switch, it thinks there's a blackout every time someone turns the lights off, and flattens its battery."),
-                Std("AS 2293", "Emergency escape lighting and exit signs follow AS 2293, which includes regular testing and record-keeping."),
+                Std("AS/NZS 2293 series", "Emergency lighting and exit signs follow the AS/NZS 2293 series: Part 1 design and installation, Part 2 routine service and maintenance, and Part 3 the luminaires and exit signs. Includes regular testing and record-keeping."),
                 faults(
                     "Emergency light fails its discharge test: suspect the battery first (they age)",
                     "Check it has a permanent unswitched supply",
@@ -84,7 +84,7 @@ internal val commercialModule = Module(
             page(
                 "Test and tag",
                 P("Portable appliances and leads are inspected and tested at set intervals and tagged with the date and next due date."),
-                Std("AS/NZS 3760", "In-service safety inspection and testing of electrical equipment, including test intervals based on the environment."),
+                Std("AS/NZS 3760:2022", "In-service safety inspection and testing of electrical equipment, including test intervals based on the environment."),
                 WhyNot("Why can't you tape up a damaged lead and keep using it? Tape doesn't restore the mechanical strength or insulation. The conductors may be damaged inside, and the earth may be broken. Damaged = tagged out and repaired or replaced.")
             ),
             page(
@@ -94,7 +94,7 @@ internal val commercialModule = Module(
                     "Leads kept off the ground (lead stands) and away from water and traffic",
                     "Frequent test and tag because the environment is harsh"
                 ),
-                Std("AS/NZS 3012", "Electrical installations on construction and demolition sites."),
+                Std("AS/NZS 3012:2019", "Electrical installations on construction and demolition sites."),
                 Hazard("Leads run over by plant, cut by tools or lying in water are a big shock risk on construction sites.")
             )
         ),
@@ -109,7 +109,7 @@ internal val commercialModule = Module(
                 "Safety services",
                 P("Safety services are things that must keep working in a fire: fire pumps, smoke control fans, fire detection, evacuation systems, some lifts."),
                 WhyNot("Why aren't fire services on the general main switch? Firefighters often shut off general power in a burning building. Safety services are arranged with their own clearly marked main switches and protected cabling so they keep running while everything else is off."),
-                Std("Section 7 (safety services)", "Supply arrangements, cabling and protection for safety services are in Section 7. There are special rules about how their circuits are protected. Look them up rather than assuming normal rules apply."),
+                Std("Section 7 (safety services)", "Supply arrangements, cabling and protection for safety services are in Section 7. For example, a fire pump's main switch must be labelled 'IN THE EVENT OF FIRE DO NOT SWITCH OFF' (Clause 7.2.4.4), and fire pump protection must be sized so it won't trip during normal running. Look up the details rather than assuming normal rules apply."),
                 Hazard("Isolating a safety service (fire pump, smoke fan) can leave a building unprotected. It must be coordinated with the building's fire systems people. Never isolate without permission.")
             )
         ),
