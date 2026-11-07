@@ -5,7 +5,8 @@ enum class Visual {
     CIRCUIT, WATER, OHMS, SERIES_PARALLEL, AC_WAVE, BODY_CURRENT, SWITCH_ACTIVE,
     MEN_FAULT, RCD, BREAKER, MULTIMETER, INSULATION, CLAMP, LOOP_IMPEDANCE,
     VOLTAGE_DROP, THREE_PHASE, INDUCTION_MOTOR, DC_MOTOR, TRANSFORMER, STAR_DELTA,
-    PUMP_SHARED, PILOT_CORE, NER, BACKFEED, HALF_SPLIT
+    PUMP_SHARED, PILOT_CORE, NER, BACKFEED, HALF_SPLIT,
+    PILOT_CHAIN, OUTLET_START, DIODE_TEST, XLPE_LAYERS, FAN_ROTATION
 }
 
 enum class Level(val label: String, val emoji: String) {
@@ -14,7 +15,7 @@ enum class Level(val label: String, val emoji: String) {
     ADVANCED("Advanced", "🔴")
 }
 
-enum class Group { CORE, INDUSTRY }
+enum class Group { UNDERGROUND, CORE, INDUSTRY }
 
 sealed interface Block
 

@@ -7,11 +7,11 @@ private const val SITE_NOTE =
 
 internal val miningModule = Module(
     id = "mining",
-    title = "Underground Mining (WA)",
+    title = "Underground Mining Overview (WA)",
     emoji = "⛏️",
     blurb = "Jumbo boxes, DBs, fan and pump starters, trailing cables, jumbo/Solo electrical cabinets, transformers, generators, and finding faults underground.",
     color = 0xFFF4511E,
-    group = Group.INDUSTRY,
+    group = Group.UNDERGROUND,
     lessons = listOf(
         lesson(
             "u1", "How power gets underground", "🗺️", 8, Level.BEGINNER,
@@ -118,7 +118,7 @@ internal val miningModule = Module(
                     "Restrained plug outlets (couplers) with interlocks",
                     "Indicator lights, test buttons and reset controls"
                 ),
-                Tip("WA companies such as Murray Engineering build this type of gear (starter panels, distribution boards, transportable substations) for mines. Each manufacturer's internals differ. Always use the drawings and manual for the actual unit.")
+                Tip("Specialist manufacturers build this type of gear (starter panels, distribution boards, transportable substations) for mines. Each manufacturer's internals differ. Always use the drawings and manual for the actual unit.")
             ),
             page(
                 "Distribution boards (DBs) underground",

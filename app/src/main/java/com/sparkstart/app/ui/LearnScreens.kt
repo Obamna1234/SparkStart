@@ -58,6 +58,7 @@ fun HomeScreen(store: Store, onModule: (String) -> Unit, onLesson: (String) -> U
     val v = store.version
     val done = store.done
     val core = Course.modules.filter { it.group == Group.CORE }
+    val ug = Course.modules.filter { it.group == Group.UNDERGROUND }
     LazyColumn(Modifier.fillMaxSize(), contentPadding = androidx.compose.foundation.layout.PaddingValues(16.dp)) {
         item {
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -92,15 +93,22 @@ fun HomeScreen(store: Store, onModule: (String) -> Unit, onLesson: (String) -> U
                 }
             }
             Spacer(Modifier.height(16.dp))
-            Text("Core skills", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-            Text("Start at the top and work down. Each lesson is about 5–10 minutes.", style = MaterialTheme.typography.bodySmall)
+            Text("⛏️ Underground track", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("Your main path: isolation, mine power, outlet protection, testing, cables, rigs, BEVs, fans and pumps. Start at the top.", style = MaterialTheme.typography.bodySmall)
+            Spacer(Modifier.height(8.dp))
+        }
+        items(ug, key = { it.id }) { m -> ModuleCard(m, done, onModule) }
+        item {
+            Spacer(Modifier.height(16.dp))
+            Text("⚡ Core electrical theory", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+            Text("How circuits, components, motors and the Wiring Rules work. The underground lessons link back to these.", style = MaterialTheme.typography.bodySmall)
             Spacer(Modifier.height(8.dp))
         }
         items(core, key = { it.id }) { m -> ModuleCard(m, done, onModule) }
         item {
             Spacer(Modifier.height(8.dp))
             Text(
-                "🏗️ Domestic, commercial and underground mining lessons are in the Industries tab.",
+                "🏗️ Domestic and commercial lessons are in the Industries tab.",
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.padding(vertical = 8.dp)
             )
@@ -116,7 +124,7 @@ fun IndustriesScreen(store: Store, onModule: (String) -> Unit) {
         item {
             Text("🏗️ Industries", fontSize = 26.sp, fontWeight = FontWeight.Black)
             Text(
-                "Pick where you work (or want to). Each area has Beginner 🟢, Intermediate 🟡 and Advanced 🔴 lessons on real equipment, the hazards, why things are done a certain way, and how to find faults.",
+                "Other areas of the trade. Each one has Beginner 🟢, Intermediate 🟡 and Advanced 🔴 lessons on real equipment, the hazards, why things are done a certain way, and how to find faults.",
                 style = MaterialTheme.typography.bodyMedium
             )
             Spacer(Modifier.height(12.dp))

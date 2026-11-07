@@ -83,6 +83,11 @@ fun VisualHost(v: Visual, caption: String) {
                 Visual.NER -> NerSim()
                 Visual.BACKFEED -> BackfeedSim()
                 Visual.HALF_SPLIT -> HalfSplitSim()
+                Visual.PILOT_CHAIN -> PilotChainSim()
+                Visual.OUTLET_START -> OutletStartSim()
+                Visual.DIODE_TEST -> DiodeTestSim()
+                Visual.XLPE_LAYERS -> XlpeLayersSim()
+                Visual.FAN_ROTATION -> FanRotationSim()
             }
             if (caption.isNotBlank()) {
                 Text(caption, style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(top = 8.dp))
