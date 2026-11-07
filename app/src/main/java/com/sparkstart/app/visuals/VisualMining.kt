@@ -43,85 +43,110 @@ private val Orange = Color(0xFFFF9800)
 
 @Composable
 internal fun PumpSharedSim() {
+    // 0 = pump in the jumbo's own pump outlet, 1 = pump on a separate pump starter
     var mode by remember { mutableIntStateOf(1) }
     var fault by remember { mutableStateOf(false) }
-    val phase = rememberFlow(if (fault) 0.35f else 0.1f)
+    var tripped by remember(mode, fault) { mutableStateOf(false) }
+    androidx.compose.runtime.LaunchedEffect(mode, fault) {
+        if (fault && mode == 0) {
+            kotlinx.coroutines.delay(1500)
+            tripped = true
+        }
+    }
+    val live = fault && !tripped
+    val phase = rememberFlow(if (live) 0.35f else 0.1f)
     val ink = ink()
-    PillRow(listOf("Pump on its OWN outlet", "Pump fed FROM the jumbo"), mode) { mode = it }
-    Canvas(Modifier.fillMaxWidth().height(250.dp)) {
+    PillRow(listOf("Pump in the JUMBO's pump outlet", "Pump on a SEPARATE pump starter"), mode) { mode = it }
+    Canvas(Modifier.fillMaxWidth().height(260.dp)) {
         val W = size.width
         val H = size.height
-        val floorY = H * 0.78f
-        // floor + sump water
-        drawLine(Color(0xFF8D6E63), Offset(0f, floorY), Offset(W, floorY), 3.dp.toPx())
-        drawRect(Palette.Water.copy(alpha = if (fault) 0.55f else 0.35f), Offset(W * 0.55f, floorY - 6.dp.toPx()), Size(W * 0.45f, H - floorY + 6.dp.toPx()))
-        label("water on the floor / sump", W * 0.77f, H - 6.dp.toPx(), ink, 10f)
-        // supply box
-        box(Offset(W * 0.02f, H * 0.08f), Size(W * 0.18f, H * 0.3f), Color(0xFFECEFF1), ink)
-        label("supply /", W * 0.11f, H * 0.18f, Color.Black, 10f)
-        label("jumbo box", W * 0.11f, H * 0.18f + 12.dp.toPx(), Color.Black, 10f)
-        // jumbo
+        val floorY = H * 0.8f
+        val waterTop = floorY - 8.dp.toPx()
+        val waterLive = live && mode == 1
+        // floor + water across the face area
+        drawRect(
+            if (waterLive) Palette.Bad.copy(alpha = 0.35f) else Palette.Water.copy(alpha = 0.4f),
+            Offset(W * 0.25f, waterTop), Size(W * 0.75f, H - waterTop)
+        )
+        drawLine(Color(0xFF8D6E63), Offset(0f, floorY), Offset(W * 0.25f, floorY), 3.dp.toPx())
+        label(if (waterLive) "WATER ENERGISED" else "water at the face", W * 0.62f, H - 6.dp.toPx(), if (waterLive) Palette.Bad else ink, 10f)
+        // jumbo box (supply)
+        box(Offset(W * 0.02f, H * 0.06f), Size(W * 0.17f, H * 0.22f), Color(0xFFECEFF1), ink)
+        label("jumbo", W * 0.105f, H * 0.15f, Color.Black, 10f)
+        label("box", W * 0.105f, H * 0.15f + 12.dp.toPx(), Color.Black, 10f)
+        // jumbo with stabiliser legs into the water
         val jL = W * 0.3f
         val jR = W * 0.62f
-        val jT = H * 0.38f
-        val jB = floorY - 14.dp.toPx()
-        val frameLive = fault && mode == 1
-        drawRect(if (frameLive) Orange.copy(alpha = 0.45f) else Color(0xFFFFD54F).copy(alpha = 0.6f), Offset(jL, jT), Size(jR - jL, jB - jT))
+        val jT = H * 0.36f
+        val jB = H * 0.62f
+        val frameLive = waterLive
+        drawRect(if (frameLive) Orange.copy(alpha = 0.5f) else Color(0xFFFFD54F).copy(alpha = 0.6f), Offset(jL, jT), Size(jR - jL, jB - jT))
         drawRect(ink, Offset(jL, jT), Size(jR - jL, jB - jT), style = Stroke(2.dp.toPx()))
-        drawCircle(ink, 9.dp.toPx(), Offset(jL + 16.dp.toPx(), jB + 5.dp.toPx()))
-        drawCircle(ink, 9.dp.toPx(), Offset(jR - 16.dp.toPx(), jB + 5.dp.toPx()))
-        label("JUMBO", (jL + jR) / 2, (jT + jB) / 2, Color.Black, 13f)
-        // pump
-        val pX = W * 0.85f
-        val pY = floorY + 14.dp.toPx()
-        drawRect(Steel, Offset(pX - 12.dp.toPx(), pY - 18.dp.toPx()), Size(24.dp.toPx(), 34.dp.toPx()))
-        label("pump", pX, pY - 24.dp.toPx(), ink, 10f)
-        // cables
-        val supOut = Offset(W * 0.2f, H * 0.2f)
+        label("JUMBO", (jL + jR) / 2, (jT + jB) / 2 + 4.dp.toPx(), Color.Black, 13f)
+        val legL = jL + 10.dp.toPx()
+        val legR = jR - 10.dp.toPx()
+        drawLine(Steel, Offset(legL, jB), Offset(legL, floorY + 4.dp.toPx()), 5.dp.toPx())
+        drawLine(Steel, Offset(legR, jB), Offset(legR, floorY + 4.dp.toPx()), 5.dp.toPx())
+        label("stabiliser legs", (jL + jR) / 2, jB + 14.dp.toPx(), ink, 9f)
+        // jumbo trailing cable
+        val jbOut = Offset(W * 0.19f, H * 0.2f)
         val jIn = Offset(jL, jT + 10.dp.toPx())
-        drawLine(Color(0xFF424242), supOut, jIn, 5.dp.toPx())
-        label("trailing cable", (supOut.x + jIn.x) / 2 + 30.dp.toPx(), (supOut.y + jIn.y) / 2 - 6.dp.toPx(), ink, 9f)
-        val pumpCable: List<Offset> = if (mode == 1) {
-            listOf(Offset(jR, jT + 14.dp.toPx()), Offset(pX, jT + 14.dp.toPx()), Offset(pX, pY - 18.dp.toPx()))
+        drawLine(Color(0xFF424242), jbOut, jIn, 5.dp.toPx())
+        // separate pump starter (mode 1)
+        val psL = W * 0.74f
+        val psT = H * 0.04f
+        if (mode == 1) {
+            box(Offset(psL, psT), Size(W * 0.22f, H * 0.18f), Color(0xFFECEFF1), ink)
+            label("separate", psL + W * 0.11f, psT + 14.dp.toPx(), Color.Black, 9f)
+            label("pump starter", psL + W * 0.11f, psT + 26.dp.toPx(), Color.Black, 9f)
+        }
+        // pump in the water
+        val pX = W * 0.86f
+        val pY = floorY + 10.dp.toPx()
+        drawRect(Steel, Offset(pX - 12.dp.toPx(), pY - 18.dp.toPx()), Size(24.dp.toPx(), 30.dp.toPx()))
+        label("pump", pX, pY - 22.dp.toPx(), ink, 10f)
+        val pumpCable: List<Offset> = if (mode == 0) {
+            listOf(Offset(jR, jT + 12.dp.toPx()), Offset(pX, jT + 12.dp.toPx()), Offset(pX, pY - 18.dp.toPx()))
         } else {
-            listOf(Offset(W * 0.2f, H * 0.12f), Offset(pX, H * 0.12f), Offset(pX, pY - 18.dp.toPx()))
+            listOf(Offset(psL + W * 0.11f, psT + H * 0.18f), Offset(pX, psT + H * 0.18f + 30.dp.toPx()), Offset(pX, pY - 18.dp.toPx()))
         }
         polyline(pumpCable, Color(0xFF424242), 4.dp.toPx())
-        label(if (mode == 1) "pump cable from the jumbo" else "pump's own cable + protection", (pumpCable[0].x + pumpCable[1].x) / 2, pumpCable[0].y - 6.dp.toPx(), ink, 9f)
-        // person standing in water touching jumbo
-        val personX = jR + 18.dp.toPx()
-        stickPerson(Offset(personX, floorY), 56.dp.toPx(), if (frameLive) Palette.Bad else ink)
-        if (fault) {
-            // leakage from pump into water
-            for (k in 0 until 6) {
-                val f = (phase + k / 6f) % 1f
-                drawCircle(Palette.Bad, 3.5.dp.toPx(), Offset(pX - 16.dp.toPx() - f * W * 0.25f, pY + 4.dp.toPx() - f * 4.dp.toPx()))
-            }
-            label("⚡ insulation fault in pump", pX, floorY - 30.dp.toPx(), Palette.Bad, 10f, Paint.Align.RIGHT)
-            if (mode == 1) {
-                // fault path back up the pump cable earth to the jumbo frame
-                dotsAlong(pumpCable.reversed(), phase, 8, Orange, 3.5.dp.toPx())
-                label("jumbo frame is part of", (jL + jR) / 2, jT - 18.dp.toPx(), Palette.Bad, 10f)
-                label("the pump's fault path", (jL + jR) / 2, jT - 6.dp.toPx(), Palette.Bad, 10f)
-            } else {
-                dotsAlong(pumpCable.reversed(), phase, 8, Orange, 3.5.dp.toPx())
-                label("pump's own protection trips", W * 0.6f, H * 0.12f + 16.dp.toPx(), Palette.Good, 10f)
-            }
+        if (mode == 0) label("jumbo's pump outlet", (jR + pX) / 2, jT + 4.dp.toPx(), ink, 9f)
+        // operator standing in water next to the rig
+        val personX = jR + 22.dp.toPx()
+        stickPerson(Offset(personX, floorY), 52.dp.toPx(), if (waterLive) Palette.Bad else ink)
+        if (fault) label("⚡ pump fault", pX, floorY - 34.dp.toPx(), Palette.Bad, 10f)
+        if (live && mode == 1) {
+            // loop: pump -> water -> stabiliser legs -> jumbo frame -> jumbo trailing cable earth -> jumbo box
+            val loop = listOf(
+                Offset(pX - 12.dp.toPx(), pY), Offset(legR, floorY + 4.dp.toPx()), Offset(legR, jB),
+                Offset(legL, jB), Offset(jL, jT + 10.dp.toPx()), jbOut
+            )
+            dotsAlong(loop, phase, 14, Palette.Bad, 4.dp.toPx())
+            label("fault current loops through water,", W * 0.5f, H * 0.29f, Palette.Bad, 10f)
+            label("legs, jumbo frame & jumbo cable", W * 0.5f, H * 0.29f + 12.dp.toPx(), Palette.Bad, 10f)
         }
+        if (live && mode == 0) {
+            // fault goes straight back on the pump cable earth -> jumbo -> jumbo cable -> jumbo box
+            dotsAlong(pumpCable.reversed() + listOf(jIn, jbOut), phase, 12, Orange, 3.5.dp.toPx())
+            label("fault returns on the earth core", W * 0.5f, H * 0.29f, Orange, 10f)
+        }
+        if (tripped) label("✅ jumbo box protection TRIPPED", W * 0.5f, H * 0.29f, Palette.Good, 11f)
     }
     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
         Button(onClick = { fault = !fault }) { Text(if (fault) "Clear the fault" else "Make a pump fault ⚡") }
     }
     Explain(
         when {
-            !fault && mode == 1 -> "A submersible pump sits IN water and gets dragged around, so its cable and seals take a beating. Here it's fed from the jumbo, so the jumbo and pump are tied into one circuit and share one earth path."
-            !fault -> "Here the pump has its own outlet and cable, with its own protection, separate from the jumbo."
-            mode == 1 -> "Pump fault: leakage current goes into the water AND back along the pump's earth to the jumbo. Until protection clears it, the jumbo frame and the water around it are part of the fault, and a person standing in water touching the rig is in the current's path. When it does trip, the whole jumbo loses power too."
-            else -> "Pump fault on its own circuit: the fault is limited to the pump circuit and its own protection deals with it. The jumbo, and the operator on it, aren't part of that fault path."
+            !fault && mode == 0 -> "Pump plugged into the jumbo's own pump outlet: jumbo and pump share ONE supply, ONE earth system and ONE set of protection at the jumbo box. Their frames are bonded together."
+            !fault -> "Pump on a separate starter: the jumbo and pump are on two different circuits with different earth paths, but they're standing in the same water."
+            mode == 0 && !tripped -> "Pump fault: the fault current goes back along the pump cable's earth core, through the jumbo and up its trailing cable, to the jumbo box…"
+            mode == 0 -> "…where the protection sees it and trips. The jumbo and pump are bonded together, so there's no voltage difference between them for the operator to bridge."
+            else -> "Pump fault: the current has another way home. It goes out of the pump, through the water, up the jumbo's stabiliser legs, through the frame and back along the jumbo's trailing cable. The pump's protection SHOULD trip. But if it doesn't (faulty relay, leakage below its trip setting, or a high-resistance path through the water), the water and the jumbo stay energised, with the operator standing in it."
         },
         if (fault && mode == 1) Palette.Bad else Color.Unspecified
     )
-    Explain("This diagram shows the general principle: water conducts, and everything sharing an earth path shares the fault. Exactly what's allowed (and how the jumbo and pump protection is set up) is decided by your site's electrical engineering rules. Always check with your supervisor.")
+    Explain("This shows the physics: water conducts, the stabiliser legs give a path to ground, and two separate earth systems in the same water can push current through it. Your site's exact rule, and what it calls this, comes from your supervisor and site electrical standards.")
 }
 
 @Composable
