@@ -1,0 +1,7 @@
+<resources>
+    <style name="Theme.SparkStart" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/bg</item>
+    </style>
+    <color name="bg">#FFFFFBF2</color>
+    <color name="icon_bg">#FF1B2A41</color>
+</resources>
