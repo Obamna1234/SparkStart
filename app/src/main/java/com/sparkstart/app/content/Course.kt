@@ -19,6 +19,9 @@ object Course {
         ugRigsModule,
         ugBevModule,
         ugFansPumpsModule,
+        ugBoxesModule,
+        ugRelaysModule,
+        ugTroubleModule,
         ugWorkshopModule,
         ugIncidentsModule,
         basicsModule,
@@ -185,5 +188,5 @@ object Course {
         Flashcard("u56", "Electric shock: always…", "Isolate first, DRSABCD, medical ECG (they don't drive), report", "ug_incidents"),
         Flashcard("u57", "Machine contacted > 1000 V AC", "Park it up about 24 h (tyre explosion/fire risk)", "ug_incidents"),
         Flashcard("u58", "Valid reason for live work?", "Only real necessity with no alternative. NEVER lost production.", "ug_incidents")
-    )
+    ) + boxFlashcards
 }

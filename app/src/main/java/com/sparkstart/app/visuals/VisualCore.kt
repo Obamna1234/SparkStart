@@ -88,6 +88,13 @@ fun VisualHost(v: Visual, caption: String) {
                 Visual.DIODE_TEST -> DiodeTestSim()
                 Visual.XLPE_LAYERS -> XlpeLayersSim()
                 Visual.FAN_ROTATION -> FanRotationSim()
+                Visual.BOX_DOOR -> BoxDoorSim()
+                Visual.CT_OVERLOAD -> CtOverloadSim()
+                Visual.ELR_TEST -> ElrTestSim()
+                Visual.PILOT_RELAY -> PilotRelaySim()
+                Visual.SNORE -> SnoreSim()
+                Visual.FAN_STAGING -> FanStagingSim()
+                Visual.LEAKY_FEEDER -> LeakyFeederSim()
             }
             if (caption.isNotBlank()) {
                 Text(caption, style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(top = 8.dp))
