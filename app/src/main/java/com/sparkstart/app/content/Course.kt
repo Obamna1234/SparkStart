@@ -56,7 +56,7 @@ object Course {
             extraQuizzes.filter { moduleId == null || it.first == moduleId }.map { it.second }
     }
 
-    private val extraQuizzes: List<Pair<String, Quiz>> = listOf(
+    internal val extraQuizzes: List<Pair<String, Quiz>> = listOf(
         "basics" to Quiz("What unit is current measured in?", listOf("Volts", "Ohms", "Amps", "Watts"), 2, "Current is measured in amps (A)."),
         "basics" to Quiz("What is 1 kW in watts?", listOf("10 W", "100 W", "1000 W", "1,000,000 W"), 2, "Kilo = 1000."),
         "safety" to Quiz("Which tester should NOT be used on its own to prove a circuit dead?", listOf("Two-pole voltage tester", "Non-contact 'volt stick'", "Multimeter on V~ (CAT rated)", "Approved voltage indicator"), 1, "Non-contact testers can miss voltage. Use an approved contact tester with test-prove-test."),

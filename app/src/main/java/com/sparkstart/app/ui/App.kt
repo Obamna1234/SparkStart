@@ -27,6 +27,7 @@ sealed interface Screen {
     data object ProgressS : Screen
     data object Flags : Screen
     data object About : Screen
+    data object SearchS : Screen
 }
 
 private data class Tab(val screen: Screen, val icon: String, val label: String)
@@ -54,6 +55,7 @@ fun App(store: Store) {
     val tabs = listOf(
         Tab(Screen.Home, "📚", "Learn"),
         Tab(Screen.Industries, "🏗️", "Industries"),
+        Tab(Screen.SearchS, "🔍", "Search"),
         Tab(Screen.PracticeHub, "🎯", "Practice"),
         Tab(Screen.ProgressS, "📈", "Progress")
     )
@@ -117,6 +119,10 @@ fun App(store: Store) {
                 )
                 Screen.Flags -> FlagsScreen(store, onBack = { back() })
                 Screen.About -> AboutScreen(store, onBack = { back() })
+                Screen.SearchS -> SearchScreen(store, onOpen = { id, pg ->
+                    store.setPosition(id, pg)
+                    go(Screen.LessonS(id))
+                })
             }
         }
     }
